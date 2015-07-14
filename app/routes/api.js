@@ -1,12 +1,12 @@
 var User = require('../models/user'),
   router = require('express').Router(),
   config = require('../../config'),
-  jsonWebToken = require('jsonwebtoken');
+  jwt = require('jsonwebtoken');
 
 var secretKey = config.secretKey;
 
 function createToken(user) { 
-  var token = jsonWebToken.sign({
+  var token = jwt.sign({
     _id: user._id,
     username: user.username
   }, secretKey, {
@@ -70,6 +70,7 @@ router.post('/login', function (req, res) {
         
         // create token
         var token = createToken(user);
+        
         res.status(200).json({
           success: true,
           token: token
