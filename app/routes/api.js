@@ -5,8 +5,7 @@ var User = require('../models/user'),
 
 var secretKey = config.secretKey;
 
-function createToken(user) {
-  
+function createToken(user) { 
   var token = jsonWebToken.sign({
     _id: user._id,
     username: user.username
@@ -45,7 +44,7 @@ router.post('/signup', function (req, res) {
       res.status(500).json(err);
       return;
     }
-    res.status(201).json({ message: 'User has been created!'});
+    res.status(201).json({ message: 'User has been created!' });
   }); 
 
 });
@@ -55,11 +54,11 @@ router.post('/login', function (req, res) {
   
   User.findOne({
     username: req.body.username
-  }).select('password').exec(function (err, user) {
+  }).select('password username').exec(function (err, user) {
 
     if (err) throw err;
 
-    if (!user) {
+    if (!user) {      
       res.status(400).json({ message: "User doesn't exist" });
     
     } else if (user) {
