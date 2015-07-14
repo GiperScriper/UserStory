@@ -26,6 +26,7 @@ app.use(logger('dev'));
 
 // routes
 app.use('/api/v1', routes);
+
 // var api = require('./app/routes/api')(app, express);
 // app.use('/api', api);
 
