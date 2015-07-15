@@ -3,7 +3,8 @@ var express = require('express'),
   logger = require('morgan'),
   config = require('./config'),
   mongoose = require('mongoose'),
-  routes = require('./app/routes/api');
+  routes = require('./app/routes/api'),
+  storyRoutes = require('./app/routes/story');
   
 var jwt = require('jsonwebtoken');
 var secretKey = config.secretKey;
@@ -27,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // enable logger
 app.use(logger('dev'));
 
-// routes
+// user routes
 app.use('/api/v1', routes);
 
 // middleware interceptor for token
@@ -43,6 +44,7 @@ app.use(function (req, res, next) {
       if (err) return res.status(403).json({success: false, message:'Failed to authenticate user', err: err});
 
       req.decoded = decoded;
+      req.myValue = 'test value';
       next();
     });
   
@@ -52,12 +54,16 @@ app.use(function (req, res, next) {
 
   
 });
+
+// story routes
+app.use('/api/v1', storyRoutes);
+
 // var api = require('./app/routes/api')(app, express);
 // app.use('/api', api);
 
 // test for token middleware
 app.get('/home', function (req, res) {
-  res.status(200).json('hone route');
+  res.status(200).json('home route');
 });
 
 

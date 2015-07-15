@@ -1,4 +1,5 @@
 var User = require('../models/user'),
+  Story = require('../models/story'),
   router = require('express').Router(),
   config = require('../../config'),
   jwt = require('jsonwebtoken');
@@ -7,7 +8,7 @@ var secretKey = config.secretKey;
 
 function createToken(user) { 
   var token = jwt.sign({
-    _id: user._id,
+    id: user._id,
     username: user.username
   }, secretKey, {
     expiresInMinutes: 1440
@@ -83,6 +84,7 @@ router.post('/login', function (req, res) {
   });
 
 });
+
 
 module.exports = router;
 
