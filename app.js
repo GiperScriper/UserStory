@@ -5,7 +5,8 @@ var express = require('express'),
   mongoose = require('mongoose'),
   routes = require('./app/routes/api'),
   storyRoutes = require('./app/routes/story');
-  
+
+var tokenAuth = require('./app/middleware/tokenAuth');  
 var jwt = require('jsonwebtoken');
 var secretKey = config.secretKey;
 
@@ -13,7 +14,7 @@ var secretKey = config.secretKey;
 var app = express();
 
 // connect to the database
-mongoose.connect(config.database, function (err) {
+mongoose.connect(config.database.url, function (err) {
   if (err) {
     console.log(err);
   } else {
@@ -32,28 +33,7 @@ app.use(logger('dev'));
 app.use('/api/v1', routes);
 
 // middleware interceptor for token
-app.use(function (req, res, next) {
-  console.log('Somebody came to our app');
-  var token = req.body.token || req.params.token || req.headers['x-access-token'];
-  console.log('TOKEN');
-  console.log(token);
-
-  // check if token exist
-  if (token) {
-    jwt.verify(token, secretKey, function (err, decoded) {
-      if (err) return res.status(403).json({success: false, message:'Failed to authenticate user', err: err});
-
-      req.decoded = decoded;
-      req.myValue = 'test value';
-      next();
-    });
-  
-  } else {
-    res.status(403).json({ success: false, message:'No Token Provided' });    
-  }
-
-  
-});
+app.use(tokenAuth);
 
 // story routes
 app.use('/api/v1', storyRoutes);
