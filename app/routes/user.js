@@ -1,16 +1,13 @@
-var User = require('../models/user'),
-  Story = require('../models/story'),
+var User = require('../models/user'),  
   router = require('express').Router(),
   config = require('../../config'),
   jwt = require('jsonwebtoken');
-
-var secretKey = config.secretKey;
 
 function createToken(user) { 
   var token = jwt.sign({
     id: user._id,
     username: user.username
-  }, secretKey, {
+  }, config.secretKey, {
     expiresInMinutes: 1440
   });
 
@@ -77,9 +74,7 @@ router.post('/login', function (req, res) {
           token: token
         });
       }
-    }
-
-    //res.status(200).json(user);
+    }    
 
   });
 
@@ -87,33 +82,3 @@ router.post('/login', function (req, res) {
 
 
 module.exports = router;
-
-// module.exports = function (app, express) {
-//   var api = express.Router();
-
-//   app.post('/register', function (req, res) {
-//     console.log(req.body);
-//     var user = new User({
-//       firstName: req.body.firstName,
-//       lastName: req.body.lastName,
-//       username: req.body.username,
-//       password: req.body.password
-//     });
-
-//     user.save(function (err) {
-//       if (err) {
-//         res.send(err + ' my error');
-//         return;
-//       } 
-
-//       res.json({ message: 'User has been created!'});      
-//     });
-//   });
-
-//   app.get('/message', function (req, res) {
-//     res.json({message: "it's me!"});
-//   });
-
-//   return api;
-
-// };

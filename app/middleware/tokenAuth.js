@@ -1,3 +1,6 @@
+var jwt = require('jsonwebtoken');
+var config = require('../../config');
+
 // middleware interceptor for token
 function tokenAuth(req, res, next) {
   
@@ -5,7 +8,7 @@ function tokenAuth(req, res, next) {
 
   // check if token exist
   if (token) {
-    jwt.verify(token, secretKey, function (err, decoded) {
+    jwt.verify(token, config.secretKey, function (err, decoded) {
       if (err) return res.status(403).json({success: false, message:'Failed to authenticate user', err: err});
 
       req.decoded = decoded;

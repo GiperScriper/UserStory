@@ -1,8 +1,8 @@
 var Story = require('../models/story');  
-var router = require('express').Router();
+var storyRouter = require('express').Router();
 
 
-router.route('/story')
+storyRouter.route('/story')
   .post(function (req, res) {
     // create new story    
     var story = new Story({
@@ -29,4 +29,4 @@ router.route('/story')
   })
 
 
-module.exports = router;
+module.exports = storyRouter;

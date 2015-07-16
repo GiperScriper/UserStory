@@ -4,4 +4,7 @@ module.exports = {
   },
   'port': 5001,
   'secretKey': 'secret',
+  'api': {
+    'baseUrl': '/api/v1'
+  }
 }
