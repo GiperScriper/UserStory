@@ -1,0 +1,24 @@
+{
+  "name": "UserStory",
+  "version": "0.0.0",
+  "homepage": "https://github.com/GiperScriper/UserStory",
+  "authors": [
+    "Nikolay Martynov <tty0sh@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "bootstrap": "~3.3.5",
+    "bootswatch": "~3.3.5+2",
+    "angular-route": "~1.4.3",
+    "angular-resource": "~1.4.3"
+  }
+}

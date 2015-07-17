@@ -33,7 +33,8 @@ app.use(config.api.baseUrl, userRoutes);
 app.use(tokenAuth);
 // story routes
 app.use(config.api.baseUrl, storyRoutes);
-
+// handle static
+app.use(express.static(__dirname + '/public'));
 
 // all requests return index.html file
 app.get('*', function (req, res) {
