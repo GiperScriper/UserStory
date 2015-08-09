@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <title>User Story</title>
+  <!-- Vendors:css -->
+  <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/vendor/bootstrap-material-design/dist/css/material.min.css">
+
+  <!-- Custom:css -->
+  <link rel="stylesheet" href="/static/css/style.css"> 
+</head>
+<body>
+  <h1>User Story: {{ 2+2 }}</h1>
+  <div ng-controller="authController">        
+    <ul>
+      <li ng-repeat="user in data track by $index">{{ user.username }}, {{ user.firstName }} {{ user.lastName }}</li>
+    </ul>    
+  </div>
+
+  <!-- Vendors:js -->
+  <script src="vendor/jquery/dist/jquery.min.js"></script>
+  <script src="vendor/angular/angular.min.js"></script>  
+  <script src="vendor/angular-route/angular-route.min.js"></script>
+  <script src="vendor/angular-resource/angular-resource.min.js"></script>
+  
+  <!-- App: main module -->
+  <script src="app/app.module.js"></script>
+
+  <!-- Component: auth -->
+  <script src="app/components/auth/auth.module.js"></script>  
+  <script src="app/components/auth/auth.service.js"></script>
+  <script src="app/components/auth/auth.controller.js"></script>
+
+</body>
+</html>

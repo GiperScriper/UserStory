@@ -30,15 +30,15 @@ app.use(logger('dev'));
 // user routes
 app.use(config.api.baseUrl, userRoutes);
 // middleware interceptor for token
-app.use(tokenAuth);
+//app.use(tokenAuth);
 // story routes
 app.use(config.api.baseUrl, storyRoutes);
 // handle static
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public/'));
 
 // all requests return index.html file
-app.get('*', function (req, res) {
-  res.sendFile(__dirname + '/public/views/index.html');
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // start server

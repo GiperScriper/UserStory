@@ -26,7 +26,7 @@ UserSchema.pre('save', function (next) {
 });
 
 
-// custom mehtod for compare passwords
+// custom method for compare passwords
 UserSchema.methods.comparePassword = function (password) {
   var user = this;
 
