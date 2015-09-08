@@ -18,9 +18,9 @@
     //   console.log(response.token);
     // })
 
-      authFactory.login.save({username:'test', password:'test'}, function (response) {
-        console.log(response.token);
-      });
+    authFactory.login.save({username:'test', password:'test'}, function (response) {
+      console.log(response.token);
+    });
   }
 
 
