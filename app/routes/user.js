@@ -1,9 +1,9 @@
-var User = require('../models/user'),  
+var User = require('../models/user'),
   router = require('express').Router(),
   config = require('../../config'),
   jwt = require('jsonwebtoken');
 
-function createToken(user) { 
+function createToken(user) {
   var token = jwt.sign({
     id: user._id,
     username: user.username
@@ -21,9 +21,9 @@ router.get('/users', function (req, res) {
     if (err) {
         res.status(500).json(err);
         return;
-    }                
-    
-    res.status(200).json(users);    
+    }
+
+    res.status(200).json(users);
   });
 });
 
@@ -43,38 +43,38 @@ router.post('/signup', function (req, res) {
       return;
     }
     res.status(201).json({ message: 'User has been created!' });
-  }); 
+  });
 
 });
 
 // login user
 router.post('/login', function (req, res) {
-  
+
   User.findOne({
     username: req.body.username
   }).select('password username').exec(function (err, user) {
 
     if (err) throw err;
 
-    if (!user) {      
+    if (!user) {
       res.status(400).json({ message: "User doesn't exist" });
-    
+
     } else if (user) {
       var validPassword = user.comparePassword(req.body.password);
 
       if (!validPassword) {
         res.status(400).json({ message: "Invalid Password" });
       } else {
-        
+
         // create token
         var token = createToken(user);
-        
+
         res.status(200).json({
           success: true,
           token: token
         });
       }
-    }    
+    }
 
   });
 

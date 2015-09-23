@@ -3,8 +3,8 @@ var config = require('../../config');
 
 // middleware interceptor for token
 function tokenAuth(req, res, next) {
-  
-  var token = req.body.token || req.params.token || req.headers['x-access-token']; 
+
+  var token = req.body.token || req.params.token || req.headers['x-access-token'];
 
   // check if token exist
   if (token) {
@@ -15,10 +15,10 @@ function tokenAuth(req, res, next) {
       req.myValue = 'test value';
       next();
     });
-  
+
   } else {
-    res.status(403).json({ success: false, message:'No Token Provided' });    
-  }  
+    res.status(401).json({ success: false, message:'No Token Provided' });
+  }
 
 }
 

@@ -1,24 +1,36 @@
 var gulp = require('gulp');
-var watch = require('gulp-watch');
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
-var notify = require('gulp-notify');
+var gUtil = require('gulp-util');
+var source = require('vinyl-source-stream');
+var browserfiy = require('browserify');
+var watchify = require('watchify');
+var reactify = require('reactify');
 
+gulp.task('default', [], function () {
+  var bundler = watchify(browserfiy({
+    entries: ['./public/app/app.jsx'],
+    transform: [reactify],
+    extensions: ['.jsx'],
+    debug: true,
+    cache: {},
+    packageCache: {},
+    fullPaths: true
+  }));
 
-var jsFiles = ['./app/**/*.js', './app.js'];
+  function build(file) {
+    if (file) {
+      gUtil.log('Recompiling ' + file);
+    }
 
-gulp.task('default', ['jslint'], function () {
-  console.log('default task');
+    return bundler
+      .bundle()
+      .on('error', gUtil.log.bind(gUtil, 'Browserify Error'))
+      .pipe(source('main.js'))
+      .pipe(gulp.dest('./public'))
+  }
+
+  build();
+  bundler.on('update', build);
+
 });
 
 
-gulp.task('jslint', function () {
-  return gulp.src(jsFiles)
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish));    
-});
-
-
-gulp.task('watch', function () {
-
-});
