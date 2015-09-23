@@ -5,6 +5,7 @@
 exports.buildGetResponse = function (data) {
     var result = {
         data: data,
+        count: data.length || 0,
         status: 'success'
     }
 
@@ -19,7 +20,6 @@ exports.buildCreateResponse = function (data) {
 
     this.status(201).json(result);
 };
-
 
 exports.buildErrorResponse = function (err) {
     var error = {

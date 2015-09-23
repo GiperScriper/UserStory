@@ -16,7 +16,7 @@ router.post('/customers', function (req, res) {
 router.get('/customers', function (req, res) {
   var query = Customer.find({});
 
-  query.limit(4)
+  query
     .then(rb.buildGetResponse.bind(res))
     .catch(rb.buildErrorResponse.bind(res));
 

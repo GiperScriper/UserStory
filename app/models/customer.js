@@ -1,10 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var customValidator = [function (value) {
+  return (value.length > 10 && value.length < 50);
+}, 'String must be between 10 and 50'];
+
 var CustomerSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    validate: customValidator
   },
 
   created: {
