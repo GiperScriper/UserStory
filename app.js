@@ -2,10 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var logger = require('morgan');
-var db = require('./app/config/db');
 
-var config = require('./config');
-var tokenAuth = require('./app/middleware/tokenAuth');
+var db = require('./app/db');
+var loadRoutes = require('./app/init/loadRoutes');
+var config = require('./app/config/app');
+//var tokenAuth = require('./app/middleware/tokenAuth');
 
 // instantiate app
 var app = express();
@@ -19,12 +20,10 @@ app.use(methodOverride());
 app.use(logger('dev'));
 
 // require routes
-var Routes = require('./app/routes');
+var routes = require('./app/routes');
 
 // routes
-app.use(config.api.baseUrl, Routes.user);
-app.use(config.api.baseUrl, Routes.story);
-app.use(config.api.baseUrl, Routes.customer);
+loadRoutes(app, routes);
 
 // start server
 app.listen(config.port, function (err) {

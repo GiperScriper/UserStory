@@ -3,7 +3,8 @@
 */
 
 module.exports = {
-  user: require('./user'),
+  auth: require('./auth'),
   story: require('./story'),
   customer: require('./customer'),
+  project: require('./project'),
 }

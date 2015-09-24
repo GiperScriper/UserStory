@@ -10,17 +10,30 @@ var ProjectSchema = new Schema({
   description: {
     type: String,
     required: true
-  }
+  },
 
-  created: {
+  _creator: {
+    type: Schema.ObjectId,
+    required: true
+  },
+
+  members: {
+    type: Array
+  },
+
+  tasks: {
+    type: Array
+  },
+
+  createdAt: {
     type: Date,
     default: Date.now
   },
 
-  updated: {
+  updatedAt: {
     type: Date,
     default: Date.now
   }
 });
 
-module.exports = mongoose.model('Project', CProjectSchema);
+module.exports = mongoose.model('Project', ProjectSchema);

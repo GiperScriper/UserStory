@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-var config = require('../../config');
+var config = require('../config/app');
 
 // middleware interceptor for token
 function tokenAuth(req, res, next) {

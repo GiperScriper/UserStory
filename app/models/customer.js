@@ -12,12 +12,12 @@ var CustomerSchema = new Schema({
     validate: customValidator
   },
 
-  created: {
+  createdAt: {
     type: Date,
     default: Date.now
   },
 
-  updated: {
+  updatedAt: {
     type: Date,
     default: Date.now
   }
