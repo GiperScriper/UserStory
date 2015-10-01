@@ -1,5 +1,5 @@
 var React = require('react');
-var Badge = require('./badge');
+var Button = require('./button');
 
 // Thumbnail component
 var Thumbnail = React.createClass({
@@ -10,7 +10,8 @@ var Thumbnail = React.createClass({
           <div className="caption">
             <h3>{this.props.label}</h3>
             <p>{this.props.text}</p>
-            <Badge title={this.props.title} number={this.props.number} />
+            <Button title={this.props.title} subTitle={this.props.number}
+            className="btn btn-primary" subTitleClassName="badge" />
         </div>
       </div>
     </div>

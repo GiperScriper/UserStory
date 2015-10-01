@@ -8,8 +8,8 @@ mongoose.set('debug', true);
 // connect to the database
 module.exports = mongoose.connect(dbConfig.url, function (err) {
   if (err) {
-    console.log(err);
+    logger.error(err);
   } else {
-    console.log('Connected to the database');
+    logger.info('Connected to the database');
   }
 });

@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var ProjectSchema = new Schema({
-  name: {
+var TaskSchema = new Schema({
+  title: {
     type: String,
     required: true
   },
@@ -14,17 +14,17 @@ var ProjectSchema = new Schema({
 
   _creator: {
     type: Schema.ObjectId,
-    ref: 'User',
     required: true
   },
 
-  members: {
+  _projectId: {
+    type: Schema.ObjectId,
+    required: true
+  }
+
+  comments: {
     type: Array
   },
-
-  // tasks: {
-  //   type: Array
-  // },
 
   createdAt: {
     type: Date,
@@ -37,4 +37,4 @@ var ProjectSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Project', ProjectSchema);
+module.exports = mongoose.model('Task', TaskSchema);

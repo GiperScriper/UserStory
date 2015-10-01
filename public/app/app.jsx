@@ -1,5 +1,6 @@
 var React = require('react');
 var ThumbnailList = require('./components/thumbnailList');
+var dropdown = require('./components/dropdown');
 
 var optionsList = {
   thumbnailData: [
@@ -20,6 +21,13 @@ var optionsList = {
   ]
 };
 
+var dropdownOptions = {
+  title: 'Menu',
+  items: ['Ruby', 'Python', 'PHP']
+}
+
+var dropdownElement =  React.createElement(dropdown, dropdownOptions);
 var thumbnailList = React.createElement(ThumbnailList, optionsList);
 // Place into body
 React.render(thumbnailList, document.querySelector('.container'));
+React.render(dropdownElement, document.querySelector('.test'));
